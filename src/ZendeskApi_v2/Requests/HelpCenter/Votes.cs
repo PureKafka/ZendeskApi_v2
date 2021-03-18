@@ -12,9 +12,11 @@ namespace ZendeskApi_v2.Requests.HelpCenter
 #if SYNC
 
 		GroupVoteResponse GetVotesForArticle(long? articleId);
+        GroupVoteResponse GetVotesForPost(long? postId);
 #endif
 #if ASYNC
 		Task<GroupVoteResponse> GetVotesForArticleAsync(long? articleId);
+        Task<GroupVoteResponse> GetVotesForPostAsync(long? postId);
 #endif
 
 	}
@@ -32,6 +34,11 @@ namespace ZendeskApi_v2.Requests.HelpCenter
 		{ 
 			return GenericGet<GroupVoteResponse>($"help_center/articles/{articleId}/votes.json");
 		}
+        
+        public GroupVoteResponse GetVotesForPost(long? postId)
+		{ 
+			return GenericGet<GroupVoteResponse>($"community/posts/{postId}/votes.json");
+		}
 		
 #endif
 #if ASYNC
@@ -39,6 +46,11 @@ namespace ZendeskApi_v2.Requests.HelpCenter
 		public async Task<GroupVoteResponse> GetVotesForArticleAsync(long? articleId)
 		{
 			return await GenericGetAsync<GroupVoteResponse>($"help_center/articles/{articleId}/votes.json");
+		}
+        
+        public async Task<GroupVoteResponse> GetVotesForPostAsync(long? postId)
+		{ 
+			return await GenericGetAsync<GroupVoteResponse>($"community/posts/{postId}/votes.json");
 		}
 
 #endif
